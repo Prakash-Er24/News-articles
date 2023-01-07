@@ -17,7 +17,7 @@ The live news articles are fetching from the RSS feed for updating the database 
 Clone the repository
 
 ```
-  git clone https://github.com/Prakash-Er24/Expense-App-Backend.git
+  git clone https://github.com/Prakash-Er24/News-articles.git
 ```
 ### Client 
 Go to the directory
