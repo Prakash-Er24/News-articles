@@ -23,7 +23,7 @@ app.get('/api/rss-news-feed',newsCtrl.list)
 
 io.on('connection',(socket)=>{
     console.log('socket connected')
-    cron.schedule('*/20 * * * * *', () => {
+    cron.schedule('* * * * *', () => {
             const data = getNews()
             if(data.length>0)
             {
