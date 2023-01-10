@@ -44,7 +44,7 @@ function Register(props) {
                     className={classes.input}
             /><br/>
             {
-                formik.touched.name && formik.errors.name && <span>{formik.errors.name}</span>
+                formik.touched.name && formik.errors.name && <span className={classes.error}>{formik.errors.name}</span>
             }
             <br/>
             <input  type="text"
@@ -55,7 +55,7 @@ function Register(props) {
                     className={classes.input}
             /><br/>
             {
-                formik.touched.email && formik.errors.email && <span>{formik.errors.email}</span>
+                formik.touched.email && formik.errors.email && <span className={classes.error}>{formik.errors.email}</span>
             }
             <br/>
 
@@ -67,7 +67,7 @@ function Register(props) {
                     className={classes.input}
             /><br/>
             {
-                formik.touched.password && formik.errors.password && <span>{formik.errors.password}</span>
+                formik.touched.password && formik.errors.password && <span className={classes.error}>{formik.errors.password}</span>
             }
             <br/>
             <input type = "submit" value="Register" className={classes.submit} />

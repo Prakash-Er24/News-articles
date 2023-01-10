@@ -99,6 +99,9 @@ export const useStyles = makeStyles({
         border:'1px solid #1565c0',
         cursor:'pointer',
         borderRadius:'5px'
+    },
+    error:{
+        color:'red'
     }
  }) 
 

@@ -39,7 +39,7 @@ function Login(props) {
                     className={classes.input}
             /><br/>
             {
-                formik.touched.email && formik.errors.email && <span>{formik.errors.email}</span>
+                formik.touched.email && formik.errors.email && <span className={classes.error}>{formik.errors.email}</span>
             }<br/>
             <input  type="password"
                     name="password"
@@ -49,7 +49,7 @@ function Login(props) {
                     className={classes.input}
             /><br/>
             {
-                formik.touched.password && formik.errors.password && <span>{formik.errors.password}</span>
+                formik.touched.password && formik.errors.password && <span className={classes.error}>{formik.errors.password}</span>
             }
             <br/>
             <input type = "submit" value="login" className={classes.submit} />
