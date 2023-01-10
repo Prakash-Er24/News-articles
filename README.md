@@ -20,7 +20,7 @@ The news articles are fetched from the different RSS feeds to update the databas
 Clone the repository
 
 ```
-  git clone https://github.com/Prakash-Er24/Expense-App-Backend.git
+  git clone https://github.com/Prakash-Er24/News-articles.git
 ```
 ### Client 
 Go to the directory
