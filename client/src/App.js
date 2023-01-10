@@ -1,9 +1,9 @@
 import React from "react";
-import Articles from "./components/Articles";
+import Container from "./components/Container";
 function App() {
   return (
     <div>
-      <Articles />
+      <Container />
     </div>
   );
 }

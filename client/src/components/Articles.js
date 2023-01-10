@@ -1,82 +1,39 @@
-import React, { useEffect } from 'react'
-import {useSelector,useDispatch} from 'react-redux'
-import { Box , CardActionArea,Card,CardContent,Typography, CardMedia, Link } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-import { startGetNewsArticles } from '../action/newsArticleAction'
+import React, { useState } from 'react'
+import {useSelector } from 'react-redux'
+import { CardActionArea,Card,CardContent,Typography, CardMedia, Link } from '@material-ui/core';
+import {Pagination} from '@mui/material'
+import { useStyles } from '../helperFunctions/styles';
+import usePagination from '../helperFunctions/Pagination';
+import TOI from '../images/TOI.jpg'
+import NDTV from '../images/NDTV.png'
 import logo from '../images/logo.png'
-import io from 'socket.io-client'
-const socket = io.connect('http://localhost:3044');
 
 const Articles = () => {
-    const dispatch = useDispatch()
-
-    useEffect(()=>{
-     socket.on('message',function(data){
-        dispatch({type:"LIVE_UPDATE",payload:data})
-     })   
-    },[dispatch])
-
-    useEffect(()=>{
-        dispatch(startGetNewsArticles())
-    },[dispatch])
-
+    let [page, setPage] = useState(1);
+            
+    const per_page = 10;
     const articles = useSelector((state)=>state.newsArticles)
-   
-    const useStyles = makeStyles({
-        root: {
-          maxWidth: 1100,
-          margin: 'auto',
-          marginBottom:"20px",
-          position:'relative'
-        },
-        media: {
-          height:"120px",
-          width:"120px",
-          float:"left",
-          margin:"20px"
-        },
-        title:{
-            textDecoration:"none",
-            color:"#0d47a1"
-        },
-        date:{
-            position:'absolute',
-            bottom:'10px',
-            right:'20px'
-        },
-        description:{
-            margin:"10px 0 20px 140px",
-        },
-        read:{
-            position:'absolute',
-            bottom:'10px',
-            left:"160px"
-        },
-        logo:{
-            height:'80px'
-        },
-        pagination:{
-            margin:'auto'
-        }
-      });
-      
+    const count = Math.ceil(articles.length / per_page);
+
     const classes = useStyles();
+    const data = usePagination(articles, per_page)
+
+    const handleChange = (event, value) => {
+        setPage(value);
+        data.jump(value);
+      }
 
     return (
     <div>
-        <Box bgcolor="text.primary"  pl={3} p={1} mb={3}>
-            <img src={logo} alt="logo" className={classes.logo}/>
-        </Box>
-       
         {
-            articles.map(article=>{
+            data.currentData().map(article=>{
              return (<div key={article.guid}>
                         <Card variant="outlined" className={classes.root} >
+                            <img src={article.author==='TOI'?TOI:NDTV} alt={articles.author} className={classes.author} />
                         <CardActionArea>
                             <CardMedia
                                 className={classes.media}
-                                image={article.image}
+                                image={article.image?article.image:logo}
                                 title={article.title}
                             />
                             <CardContent>
@@ -89,7 +46,7 @@ const Articles = () => {
                                 </Typography>
 
                                 <Typography className={classes.date} variant="body2">
-                                    {article.pubDate.split(/T|\+/).slice(0,2).join('/')}
+                                    {article.pubDate.slice(0,10)}/{article.pubDate.slice(11,16)}
                                 </Typography>
                                 
                                 <Typography>
@@ -103,9 +60,16 @@ const Articles = () => {
             </div>)
         })
     }
+    <Pagination count={count} 
+                page={page} 
+                size="large"
+                variant="outlined" 
+                shape="rounded" 
+                onChange={handleChange}
+                className={classes.pagination}
+    />
     </div>
   )
-    
 }
 
 export default Articles

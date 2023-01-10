@@ -21,8 +21,16 @@ const newsArticleSchema = new Schema({
         unique:true
     },
     pubDate:{
-        type:String,
+        type:Date,
     },
+    author:{
+        type:String,
+        required:true
+    },
+    category:{
+        type:String,
+        required:true
+    }
 },{timestamps:true})
 
 const NewsArticle = model('NewsArticle', newsArticleSchema)
