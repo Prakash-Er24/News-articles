@@ -15,7 +15,7 @@ app.use(cors())
 app.use(router)
 
 cron.schedule('* * * * *', () => {
-    getNews()
+    // getNews()
 })
 
 app.listen(port,()=>{

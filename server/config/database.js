@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 mongoose.set('strictQuery', true)
 const configureDb = () => {
-    mongoose.connect('mongodb://localhost:27017/news-articles')
+    mongoose.connect('mongodb://127.0.0.1:27017/news-articles')
         .then((res)=>{
             console.log('connected to db')
         })
-        .catch(()=>{
-            console.log('not connected')
+        .catch((err)=>{
+            console.log('not connected',err)
         })
 }
 

@@ -18,7 +18,7 @@ const getNews = async () => {
         catch(err){
             if(err['code']!==11000)
             {
-                console.log(err.message) 
+                console.log(err) 
             }  
         }
 
