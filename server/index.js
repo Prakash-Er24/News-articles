@@ -12,12 +12,12 @@ const getNews = require('./app/getArticles/getNewsArticles')
 configureDb()
 app.use(express.json())
 app.use(cors())
-app.use(router)
+app.use('/', router)
 
-cron.schedule('* * * * *', () => {
+cron.schedule('*/5 * * * *', () => {
     getNews()
 })
 
-app.listen(port,()=>{
-    console.log('server is running on port',port)
+app.listen(port, () => {
+    console.log('server is running on port', port)
 })
